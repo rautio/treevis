@@ -10,7 +10,7 @@
       width = 840,
       height = 600,
       maxDepth = 10, //max depth of the tree
-      currentColor = '#8e3496',
+      currentColor = '#8e3496', //starting color
       useRainbow = false,
       numBranches = 2,
       seed = {i: 0, x: 420, y: 600, a: 0, l: 130, d:0, c:currentColor}, // a = angle, l = length, d = depth
@@ -77,7 +77,7 @@
     }
 
     function randomColor(){
-      return '#'+rainbow.colourAt(Math.round(Math.random()*100) + 1);
+      return '#'+rainbow.colorAt(Math.round(Math.random()*100) + 1);
     }
 
     function endPt(b) {
@@ -95,12 +95,14 @@
     function x2(d) {return endPt(d).x;}
     function y2(d) {return endPt(d).y;}
     function color(d) {return d.c;}
-    function highlightParents(d) {
-      var colour = d3.event.type === 'mouseover' ? 'green' : d.c;
-      var depth = d.d;
-      for(var i = 0; i <= depth; i++) {
-        d3.select('#id-'+parseInt(d.i)).style('stroke', colour);
-        d = branches[d.parent];
+    function highlightParents(color){
+      return function (d) {
+        var color = d3.event.type === 'mouseover' ? 'green' : color;
+        var depth = d.d;
+        for(var i = 0; i <= depth; i++) {
+          d3.select('#id-'+parseInt(d.i)).style('stroke', color);
+          d = branches[d.parent];
+        }
       }
     }
 
@@ -119,8 +121,8 @@
         .attr('stroke', color)
         .style('stroke-width', function(d) {return parseInt(maxDepth + 1 - d.d) + 'px';})
         .attr('id', function(d) {return 'id-'+d.i;})
-        .on('mouseover', highlightParents)
-        .on('mouseout', highlightParents);
+        .on('mouseover', highlightParents(color))
+        .on('mouseout', highlightParents(color));
     }
 
 
@@ -130,22 +132,19 @@
         d3.select('svg')
         .selectAll('line')
         .data(branches);
-
       //Add new elements
       sel.enter().append('line')
         .attr('stroke', color)
-        .on('mouseover', highlightParents)
-        .on('mouseout', highlightParents);
+        .on('mouseover', highlightParents(color))
+        .on('mouseout', highlightParents(color));
 
       //Bind data
       sel =
         d3.select('svg')
         .selectAll('line')
         .data(branches);
-
       //Remove old elements
       sel.exit().remove();
-
       //Update existing elements
       sel.transition()
         .attr('x1', x1)

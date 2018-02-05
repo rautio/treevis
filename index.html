@@ -1,8 +1,11 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html>
   <head>
     <title>Random Binary Tree</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css"></link>
+    <!-- Fontawesome icon library -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <div id="chart">
@@ -10,11 +13,11 @@
       </svg>
     </div>
     <p>A random tree implemented using <a href="https://d3js.org/">D3.js</a> based on Peter Cook's <a href="http://animateddata.co.uk/lab/d3-tree/">D3 Tree</a>.</p>
-    <p><input type="number" step="1" min="0" id="depth-level"></p>
-    <p><input type="color" id="color_picker"></p>
-    <p><input type="checkbox" id="rainbow_checkbox">Use random colors</p>
-    <p><input type="checkbox" id="multi_tree_checkbox">Keep older trees</p>
+    <p>Depth: <input type="number" step="1" min="0" max="12" id="depth-level"></p>
+    <p><input type="checkbox" id="rainbow_checkbox">Change color</p>
     <p><button id="regenerate">Regenerate</button></p>
+    <a href="https://twitter.com/thisisoskari" class="fa fa-twitter fa-2x"></a>
+    <a href="https://github.com/rautio" class="fa fa-github fa-2x"></a>
   </body>
   <script data-main="js/config" src="js/lib/require.js"></script>
 </html>
