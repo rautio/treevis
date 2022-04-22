@@ -1,2 +1,7 @@
 # Random Binary Tree Visualization
-A random tree implemented using D3.js based on [Peter Cook's D3 Tree](http://animateddata.co.uk/lab/d3-tree/).
+
+Generates random trees given a numeric depth and using a constant or randomized color for the entire tree.
+
+## Screenshot:
+
+![Example Screenshot](example.png)
